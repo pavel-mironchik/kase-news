@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\NewsRetrieved;
 use App\News;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -16,6 +17,10 @@ use Illuminate\Support\Facades\Log;
 class RetrieveContent implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public $tries = 1;
+
+    public $timeout = 300;
 
     /**
      * Create a new job instance.
@@ -56,8 +61,10 @@ class RetrieveContent implements ShouldQueue
         $re = '|<div class="news-block">(.*?)</div>|ms';
         if (preg_match($re, $content, $matches)) {
             $news->update([
-                'content' => $matches[1]
+                'content' => trim($matches[1])
             ]);
+
+            event(new NewsRetrieved($news));
         }
     }
 }
