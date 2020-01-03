@@ -160,4 +160,18 @@ return [
             ],
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Slack notifications settings
+    |--------------------------------------------------------------------------
+    |
+    | These settings are used to notify in Slack when one of queues has a long
+    | wait time.
+    |
+    */
+
+    'slack_webhook' => env('HORIZON_SLACK_WEBHOOK_URL'),
+
+    'slack_channel' => env('HORIZON_SLACK_CHANNEL_NAME'),
 ];
