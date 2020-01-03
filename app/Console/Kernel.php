@@ -28,11 +28,11 @@ class Kernel extends ConsoleKernel
     {
          $schedule->job(new RetrieveLinks)
              ->everyThirtyMinutes()
-             ->withoutOverlapping;
+             ->withoutOverlapping();
 
          $schedule->job(new RetrieveContent)
              ->everyFiveMinutes()
-             ->withoutOverlapping;
+             ->withoutOverlapping();
     }
 
     /**
