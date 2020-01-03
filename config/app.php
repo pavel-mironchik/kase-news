@@ -174,6 +174,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],
@@ -229,5 +230,18 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admin user
+    |--------------------------------------------------------------------------
+    |
+    | These credentials are used to seed an admin user.
+    |
+    */
+
+    'admin_email' => env('ADMIN_EMAIL', 'admin@kase-news.test'),
+
+    'admin_password' => env('ADMIN_PASSWORD', 'password'),
 
 ];

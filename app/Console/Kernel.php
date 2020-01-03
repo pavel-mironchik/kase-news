@@ -26,13 +26,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->job(new RetrieveLinks)
-             ->everyThirtyMinutes()
-             ->withoutOverlapping();
+        $schedule->job(new RetrieveLinks)
+            ->everyThirtyMinutes()
+            ->withoutOverlapping();
 
-         $schedule->job(new RetrieveContent)
-             ->everyFiveMinutes()
-             ->withoutOverlapping();
+        $schedule->job(new RetrieveContent)
+            ->everyFiveMinutes()
+            ->withoutOverlapping();
+
+        $schedule->command('horizon:snapshot')
+            ->everyFiveMinutes();
     }
 
     /**
