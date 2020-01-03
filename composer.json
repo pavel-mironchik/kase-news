@@ -16,6 +16,7 @@
         "laravel/horizon": "^3.4",
         "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^2.0",
+        "spatie/flysystem-dropbox": "^1.2",
         "spatie/laravel-backup": "^6.7"
     },
     "require-dev": {
