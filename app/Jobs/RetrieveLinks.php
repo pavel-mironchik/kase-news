@@ -65,7 +65,7 @@ class RetrieveLinks implements ShouldQueue
 
         foreach ($matches as $match) {
             News::updateOrCreate([
-                'date_time'  => Carbon::create($match[1]),
+                'date_time'  => Carbon::createFromFormat('d.m.y, H:i', $match[1]),
                 'url'  => $match[2],
                 'title'  => $match[3]
             ]);
