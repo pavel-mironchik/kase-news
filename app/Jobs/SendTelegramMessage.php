@@ -46,7 +46,7 @@ class SendTelegramMessage implements ShouldQueue
         $news = $this->news;
 
         $title = $news->title;
-        $dateTime = Carbon::create($news->date_time)->format('d.m.y, g:i');
+        $dateTime = Carbon::create($news->date_time)->format('d.m.y, H:i');
         $content = $news->content;
         $url = 'https://kase.kz' . $news->url;
 
