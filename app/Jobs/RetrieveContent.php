@@ -41,7 +41,9 @@ class RetrieveContent implements ShouldQueue
     {
         $client = new Client(['base_uri' => 'https://kase.kz']);
 
-        $news = News::whereNull('content')->first();
+        $news = News::whereNull('content')
+            ->orderBy('date_time')
+            ->first();
         if (! $news) {
             return;
         }
