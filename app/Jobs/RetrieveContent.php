@@ -55,6 +55,7 @@ class RetrieveContent implements ShouldQueue
             if ($exception->hasResponse()) {
                 Log::error(Psr7\str($exception->getResponse()));
             }
+
             return;
         }
 
@@ -63,7 +64,7 @@ class RetrieveContent implements ShouldQueue
         $re = '|<div class="news-block">(.*?)</div>|ms';
         if (preg_match($re, $content, $matches)) {
             $news->update([
-                'content' => trim($matches[1])
+                'content' => trim($matches[1]),
             ]);
 
             event(new NewsRetrieved($news));

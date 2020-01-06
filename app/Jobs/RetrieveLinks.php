@@ -43,12 +43,13 @@ class RetrieveLinks implements ShouldQueue
 
         $date = Carbon::now()->subHour()->format('d.m.Y');
         try {
-            $response = $client->get($date . '/');
+            $response = $client->get($date.'/');
         } catch (RequestException $exception) {
             Log::error(Psr7\str($exception->getRequest()));
             if ($exception->hasResponse()) {
                 Log::error(Psr7\str($exception->getResponse()));
             }
+
             return;
         }
 
@@ -67,7 +68,7 @@ class RetrieveLinks implements ShouldQueue
             News::updateOrCreate([
                 'date_time'  => Carbon::createFromFormat('d.m.y, H:i', $match[1]),
                 'url'  => $match[2],
-                'title'  => $match[3]
+                'title'  => $match[3],
             ]);
         }
     }

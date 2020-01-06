@@ -48,14 +48,14 @@ class SendTelegramMessage implements ShouldQueue
         $title = $news->title;
         $dateTime = Carbon::create($news->date_time)->format('d.m.y, H:i');
         $content = $news->content;
-        $url = 'https://kase.kz' . $news->url;
+        $url = 'https://kase.kz'.$news->url;
 
         $text = "<a href='$url'>$title</a>\n\n$dateTime\n\n$content";
 
         Telegram::sendMessage([
             'chat_id' => '@kase_news',
             'text' => $text,
-            'parse_mode' => 'HTML'
+            'parse_mode' => 'HTML',
         ]);
     }
 }
