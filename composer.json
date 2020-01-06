@@ -8,6 +8,7 @@
     ],
     "license": "MIT",
     "require": {
+        "cakephp/chronos": "^1.2.3",
         "php": "^7.2",
         "bugsnag/bugsnag-laravel": "^2.0",
         "fideloper/proxy": "^4.0",
