@@ -8,15 +8,16 @@
     ],
     "license": "MIT",
     "require": {
-        "cakephp/chronos": "^1.2.3",
         "php": "^7.2",
         "bugsnag/bugsnag-laravel": "^2.0",
+        "cakephp/chronos": "^1.2.3",
         "fideloper/proxy": "^4.0",
         "irazasyed/telegram-bot-sdk": "^2.0",
         "laravel/framework": "^6.2",
         "laravel/horizon": "^3.4",
         "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^2.0",
+        "pavel-mironchik/laravel-backup-panel": "^1.2",
         "spatie/flysystem-dropbox": "^1.2",
         "spatie/laravel-backup": "^6.7"
     },

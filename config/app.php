@@ -178,6 +178,7 @@ return [
         App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\DropboxServiceProvider::class,
+        App\Providers\LaravelBackupPanelServiceProvider::class,
 
     ],
 

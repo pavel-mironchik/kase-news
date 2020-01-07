@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dd939bde93c908567b4b1960523225f0",
+    "content-hash": "ad86dac0d3418b30ff782a386afcc893",
     "packages": [
         {
             "name": "bugsnag/bugsnag",
@@ -1788,6 +1788,59 @@
                 "random"
             ],
             "time": "2018-07-02T15:55:56+00:00"
+        },
+        {
+            "name": "pavel-mironchik/laravel-backup-panel",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pavel-mironchik/laravel-backup-panel.git",
+                "reference": "2367a743b783cd41d38d407904806ec047dca028"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pavel-mironchik/laravel-backup-panel/zipball/2367a743b783cd41d38d407904806ec047dca028",
+                "reference": "2367a743b783cd41d38d407904806ec047dca028",
+                "shasum": ""
+            },
+            "require": {
+                "spatie/laravel-backup": "^6.7"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.4",
+                "phpunit/phpunit": "^8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "PavelMironchik\\LaravelBackupPanel\\LaravelBackupPanelServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "PavelMironchik\\LaravelBackupPanel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pavel Mironchik",
+                    "email": "mironchikpavel@gmail.com"
+                }
+            ],
+            "description": "An interface for Spatie Laravel Backup package",
+            "homepage": "https://github.com/pavel-mironchik/laravel-backup-panel",
+            "keywords": [
+                "backup",
+                "database",
+                "laravel-backup"
+            ],
+            "time": "2020-01-07T15:29:48+00:00"
         },
         {
             "name": "phpoption/phpoption",
