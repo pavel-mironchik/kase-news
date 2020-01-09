@@ -18,7 +18,7 @@ class LaravelBackupPanelServiceProvider extends LaravelBackupPanelApplicationSer
     {
         Gate::define('viewLaravelBackupPanel', function ($user) {
             return in_array($user->email, [
-                config('app.admin_email')
+                config('app.admin_email'),
             ]);
         });
     }
