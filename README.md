@@ -2,6 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/pavel-mironchik/kase-news/master.svg?style=flat-square)](https://travis-ci.org/pavel-mironchik/kase-news)
 [![Quality Score](https://img.shields.io/scrutinizer/g/pavel-mironchik/kase-news.svg?style=flat-square)](https://scrutinizer-ci.com/g/pavel-mironchik/kase-news)
+[![StyleCI](https://github.styleci.io/repos/231201444/shield?branch=master)](https://github.styleci.io/repos/231201444)
 
 KASE news Telegram bot delivers news from Kazakhstan stock exchange straight into your phone. 
 So you don't need anymore to check its site and not only don't miss something important, but also will get news in a convenient form.
