@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Jobs\RetrieveContent;
 use App\Jobs\RetrieveLinks;
+use App\Jobs\SendTelegramMessages;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -31,6 +32,10 @@ class Kernel extends ConsoleKernel
             ->withoutOverlapping();
 
         $schedule->job(new RetrieveContent)
+            ->everyFiveMinutes()
+            ->withoutOverlapping();
+
+        $schedule->job(new SendTelegramMessages)
             ->everyFiveMinutes()
             ->withoutOverlapping();
 
