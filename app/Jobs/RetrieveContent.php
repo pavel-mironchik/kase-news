@@ -7,6 +7,8 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7;
+use HTMLPurifier;
+use HTMLPurifier_Config;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -72,7 +74,7 @@ class RetrieveContent implements ShouldQueue
             ]);
 
             // Save messages.
-            $messages = self::extractMessages($news);
+            $messages = $this->extractMessages($news);
             foreach ($messages as $message) {
                 $news->messages()->create([
                     'content' => $message,
@@ -90,22 +92,23 @@ class RetrieveContent implements ShouldQueue
     protected function extractMessages(News $news): array
     {
         $title = $news->title;
+        $content = $this->sanitizeContent($news->content);
         $dateTime = Carbon::create($news->date_time)->format('d.m.y, H:i');
         $url = 'https://kase.kz'.$news->url;
         $header = "<a href='$url'>$title</a>\n\n$dateTime\n\n";
         $headerLength = mb_strlen($header);
 
-        if ($headerLength + mb_strlen($news->content) <= 4096) {
-            $messages = [$header.$news->content];
+        if ($headerLength + mb_strlen($content) <= 4096) {
+            $messages = [$header.$content];
         } else {
             // Split news content into messages with a length less than 4088 characters.
             // 4087 + double new line + pagination === 4087 + 2 + 7 === 4096
             $maxChunkLength = 4087 - $headerLength;
             $messages = preg_split(
                 '/(.{'.$maxChunkLength.'})/us',
-                $news->content,
+                $content,
                 -1,
-                PREG_SPLIT_NO_EMPTY|PREG_SPLIT_DELIM_CAPTURE
+                PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
             );
 
             // Compose messages.
@@ -116,5 +119,23 @@ class RetrieveContent implements ShouldQueue
         }
 
         return $messages;
+    }
+
+    /**
+     * Leave only <a> tags, replacing other with HTML entities.
+     *
+     * @param  string  $content
+     * @return string
+     */
+    protected function sanitizeContent(string $content): string
+    {
+        $config = HTMLPurifier_Config::createDefault();
+
+        $config->set('Core.Encoding', 'UTF-8');
+        $config->set('HTML.Allowed', 'a[href]');
+
+        $filter = new HTMLPurifier($config);
+
+        return $filter->purify($content);
     }
 }

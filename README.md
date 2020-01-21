@@ -5,7 +5,7 @@
 [![StyleCI](https://github.styleci.io/repos/231201444/shield?branch=master)](https://github.styleci.io/repos/231201444)
 
 KASE news Telegram bot delivers news from Kazakhstan stock exchange straight into your phone. 
-So you don't need anymore to check its site and not only don't miss something important, but also will get news in a convenient form.
+So you don't need anymore to check its site and not only don't miss something important but also will get news in a convenient form.
 Bot publishes news into [@kase_news](https://t.me/kase_news) Telegram channel.
 
 ![Screenshot](https://i.imgur.com/WkUIBSD.png)
