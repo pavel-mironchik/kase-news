@@ -104,12 +104,7 @@ class RetrieveContent implements ShouldQueue
             // Split news content into messages with a length less than 4088 characters.
             // 4087 + double new line + pagination === 4087 + 2 + 7 === 4096
             $maxChunkLength = 4087 - $headerLength;
-            $messages = preg_split(
-                '/(.{'.$maxChunkLength.'})/us',
-                $content,
-                -1,
-                PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
-            );
+            $messages = $this->splitIntoChunks($content, $maxChunkLength);
 
             // Compose messages.
             for ($i = 0; $i < count($messages); $i++) {
@@ -137,5 +132,42 @@ class RetrieveContent implements ShouldQueue
         $filter = new HTMLPurifier($config);
 
         return $filter->purify($content);
+    }
+
+    /**
+     * @param  string  $content
+     * @param $maxChunkLength
+     * @return string[]
+     */
+    protected function splitIntoChunks(string $content, int $maxChunkLength): array
+    {
+        $messages = [];
+
+        while (mb_strlen($content) > 0) {
+            $chunk = mb_substr($content, 0, $maxChunkLength - 1);
+
+            while (($tagPosition = mb_strrpos($chunk, '<')) !== false && $this->isTagSplit($chunk)) {
+                $chunk = mb_substr($chunk, 0, $tagPosition);
+            }
+
+            $messages[] = $chunk;
+            $content = mb_substr($content, mb_strlen($chunk));
+        }
+
+        return $messages;
+    }
+
+    /**
+     * Determine if the one of <a> tags was split.
+     *
+     * @param  string  $text
+     * @return bool
+     */
+    protected function isTagSplit(string $text): bool
+    {
+        $openingTags = mb_substr_count($text, '<');
+        $closingTags = mb_substr_count($text, '</a>');
+
+        return $closingTags === 0 || $openingTags / $closingTags !== 2;
     }
 }
