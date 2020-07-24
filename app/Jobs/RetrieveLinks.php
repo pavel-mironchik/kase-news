@@ -59,14 +59,15 @@ class RetrieveLinks implements ShouldQueue
             return;
         }
 
-        $re = '|class="news-list__date">(.*?)</div>.*?<div class="news-list__title"><a href="(.*?)".*?>(.*?)</a>|ms';
+        $re = '|class="news-list__date">(.*?)</div>.*?<div class="news-list__title">.*?<a href="(.*?)".*?>(.*?)</a>|ms';
         if (! preg_match_all($re, $content, $matches, PREG_SET_ORDER)) {
+            Log::error('Possible change in the site\'s HTML code');
             return;
         }
 
         foreach ($matches as $match) {
             News::updateOrCreate([
-                'date_time'  => Carbon::createFromFormat('d.m.y, H:i', $match[1]),
+                'date_time'  => Carbon::createFromFormat('d.m.y H:i', $match[1]),
                 'url'  => $match[2],
                 'title'  => $match[3],
             ]);
