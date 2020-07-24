@@ -62,6 +62,7 @@ class RetrieveLinks implements ShouldQueue
         $re = '|class="news-list__date">(.*?)</div>.*?<div class="news-list__title">.*?<a href="(.*?)".*?>(.*?)</a>|ms';
         if (! preg_match_all($re, $content, $matches, PREG_SET_ORDER)) {
             Log::error('Possible change in the site\'s HTML code');
+
             return;
         }
 
