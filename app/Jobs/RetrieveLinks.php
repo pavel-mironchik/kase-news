@@ -70,7 +70,7 @@ class RetrieveLinks implements ShouldQueue
             News::updateOrCreate([
                 'date_time'  => Carbon::createFromFormat('d.m.y H:i', $match[1]),
                 'url'  => $match[2],
-                'title'  => $match[3],
+                'title'  => trim($match[3]),
             ]);
         }
     }
