@@ -39,7 +39,10 @@ class RetrieveLinks implements ShouldQueue
      */
     public function handle()
     {
-        $client = new Client(['base_uri' => 'https://kase.kz/ru/news/']);
+        $client = new Client([
+            'base_uri' => 'https://kase.kz/ru/news/',
+            'timeout' => 30,
+        ]);
 
         $date = Carbon::now()->subHour()->format('d.m.Y');
         try {
